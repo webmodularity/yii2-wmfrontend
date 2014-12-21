@@ -13,6 +13,7 @@ $form = ActiveForm::begin([
     ]);
 ?>
 <div class="row clearfix">
+    <div id="contact-alert" class="col-md-12"></div>
     <div class="col-xs-12 col-sm-6 col-md-6">
         <div class="form-group">
             <label class="control-label">Name</label>

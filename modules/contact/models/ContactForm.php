@@ -23,9 +23,18 @@ class ContactForm extends Model
         return [
             // name, email, subject and body are required
             [['name', 'email', 'message'], 'required'],
+            [['name', 'email', 'message'], 'trim'],
+            [['name'], 'match', 'pattern' => "/^[\p{L}\s'.-]+$/u"],
+            [['name'], 'string', 'max' => 255, 'tooLong' => 'Name too long!'],
+            [['email'], 'string', 'max' => 255, 'tooLong' => 'Email too long!'],
+            [['message'], 'string', 'max' => 10000, 'tooLong' => 'Message too long! (10240 characters max)'],
             // email has to be a valid email address
-            ['email', 'email'],
-            ['captcha', 'wmc\modules\recaptcha\validators\RecaptchaValidator']
+            [['email'], 'email', 'message' => "Invalid Email Address!"],
+            [['captcha'],
+                'wmc\modules\recaptcha\validators\RecaptchaValidator',
+                'emptyMessage' => "Please confirm you aren't a robot.",
+                'incorrectMessage' => "Failed to verify reCaptcha field."
+            ]
         ];
     }
 
