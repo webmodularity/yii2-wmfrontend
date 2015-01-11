@@ -54,7 +54,7 @@ $form = ActiveForm::begin([
 
 
 <div class="form-group">
-    <?=  $form->field($model, 'captcha')->widget('wmc\modules\recaptcha\widgets\Recaptcha'); ?>
+    <?=  $form->field($model, 'captcha')->widget('wmc\modules\recaptcha\widgets\Recaptcha', ['clientOptions' => ['data-theme' => 'dark']]); ?>
 </div>
 
 <p>
