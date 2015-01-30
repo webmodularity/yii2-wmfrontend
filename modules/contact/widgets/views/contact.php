@@ -4,7 +4,7 @@ use wmc\helpers\Html;
 
 $form = ActiveForm::begin([
     'id' => \wmf\modules\contact\widgets\Contact::FORM_ID,
-    'action' => '/contact/post',
+    'action' => '/contact',
     'options' => [
         'class' => 'myform',
         'novalidate' => 'novalidate'
