@@ -10,7 +10,7 @@ use wmf\modules\contact\models\ContactForm;
 
 class DefaultController extends Controller {
     public function actionIndex() {
-        $model = new ContactForm();
+        $model = $this->newContact();
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             $model->attributes = Yii::$app->request->post('ContactForm');
             $responseArray = [
@@ -33,12 +33,21 @@ class DefaultController extends Controller {
                 'Message Received'
             );
             $this->send($model);
-            $model = new ContactForm();
+            $model = $this->newContact();
         }
         if (isset($this->module->viewLayoutFile)) {
             $this->layout = $this->module->viewLayoutFile;
         }
         return $this->render($this->module->viewFile, ['model' => $model]);
+    }
+
+    protected function newContact() {
+        $model = new ContactForm();
+        if (!Yii::$app->user->isGuest) {
+            $model->name = Yii::$app->user->identity->getFullName();
+            $model->email = Yii::$app->user->identity->person->email;
+        }
+        return $model;
     }
 
     protected function send($model) {
