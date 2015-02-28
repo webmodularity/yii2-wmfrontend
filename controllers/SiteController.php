@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\controllers;
+namespace wmf\controllers;
 
 use Yii;
 use wmu\filters\AccessControl;
