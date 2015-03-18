@@ -95,18 +95,12 @@ class Page extends \wmc\db\ActiveRecord
         return static::findOne(['name' => $name, 'status' => 1]);
     }
 
-    public function groupHasAccess($groupId) {
-        if (count($this->userGroups) == 0) {
-            return true;
-        } else if (is_null($groupId)) {
-            return false;
-        } else {
-            foreach ($this->userGroups as $userGroup) {
-                if ($userGroup->id == $groupId) {
-                    return true;
-                }
-            }
-            return false;
+    public function groupHasAccess($groupId = 0) {
+        $pageId = $this->id;
+        if (!empty($pageId) && is_int($groupId)) {
+            $access = $this->getUserGroups()->where(['id' => $groupId])->count();
+            return $access > 0 ? true : false;
         }
+        return false;
     }
 }
