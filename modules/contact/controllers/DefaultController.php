@@ -44,7 +44,7 @@ class DefaultController extends Controller {
     protected function newContact() {
         $model = new ContactForm();
         if (!Yii::$app->user->isGuest) {
-            $model->name = Yii::$app->user->identity->getFullName();
+            $model->name = Yii::$app->user->identity->person->personName->getFullName();
             $model->email = Yii::$app->user->identity->person->email;
         }
         return $model;
