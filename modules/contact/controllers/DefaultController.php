@@ -7,6 +7,7 @@ use wmf\web\Controller;
 use yii\helpers\Json;
 use wmc\helpers\Html;
 use wmf\modules\contact\models\ContactForm;
+use wmc\widgets\Alert;
 
 class DefaultController extends Controller {
     public function actionIndex() {
@@ -27,11 +28,12 @@ class DefaultController extends Controller {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return Json::encode($responseArray);
         } else if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post()) && $model->validate()) {
-            Yii::$app->alertManager->add(
-                'success',
-                'Thanks, your message has been sent and we will respond to you ASAP.',
-                'Message Received'
-            );
+            Yii::$app->alertManager->add(Alert::widget([
+                'heading' => 'Message Received',
+                'message' => 'Thanks, your message has been sent and we will respond to you ASAP.',
+                'style' => 'success',
+                'icon' => 'check-square-o'
+            ]));
             $this->send($model);
             $model = $this->newContact();
         }
