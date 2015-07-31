@@ -1,6 +1,6 @@
 <?php
 use yii\widgets\ActiveForm;
-use wmc\helpers\Html;
+use yii\helpers\Html;
 
 $form = ActiveForm::begin([
     'id' => \wmf\modules\contact\widgets\Contact::FORM_ID,

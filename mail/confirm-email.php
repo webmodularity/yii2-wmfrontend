@@ -1,5 +1,5 @@
 <?php
-use wmc\helpers\Html;
+use yii\helpers\Html;
 use yii\helpers\Url;
 $confirmLink = Url::toRoute(['/user/confirm', 'key' => $key], true);
 ?>

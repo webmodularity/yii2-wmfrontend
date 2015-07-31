@@ -1,5 +1,5 @@
 <?php
-use wmc\helpers\Html;
+use yii\helpers\Html;
 ?>
 <p>Message sent from <?= Html::mailto(Html::encode($model->name), $model->email) ?> at <?= \Yii::$app->formatter->asDatetime('now', 'short') . '&nbsp;' . date('T') ?></p>
 

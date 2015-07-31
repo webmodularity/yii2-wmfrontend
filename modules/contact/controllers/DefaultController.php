@@ -5,7 +5,7 @@ namespace wmf\modules\contact\controllers;
 use Yii;
 use wmf\web\Controller;
 use yii\helpers\Json;
-use wmc\helpers\Html;
+use yii\helpers\Html;
 use wmf\modules\contact\models\ContactForm;
 use wmc\widgets\Alert;
 
