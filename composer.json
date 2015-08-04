@@ -1,24 +1,21 @@
 {
-    "name": "webmod/yii2-wmfrontend",
-    "description": "Yii 2 based WebModularity frontend module.",
-    "type": "yii2-extension",
-    "authors": [
-        {
-            "name": "Rory Hellyer",
-            "email": "rory@webmodularity.com",
-            "homepage": "http://www.webmodularity.com/"
-        }
-    ],
-    "require": {
-        "php": ">=5.6.0",
-        "yiisoft/yii2": "*",
-        "webmod/yii2-wmcommon": "dev-master"
-
-    },
-    "autoload": {
-        "psr-4": {
-            "wmf\\": ""
-        }
+  "name": "webmod/yii2-wmfrontend",
+  "description": "Yii 2 based WebModularity frontend.",
+  "type": "yii2-extension",
+  "authors": [
+    {
+      "name": "Rory Hellyer",
+      "email": "rory@webmodularity.com",
+      "homepage": "http://www.webmodularity.com/"
     }
-}
+  ],
+  "require": {
+    "webmod/yii2-wmcommon": "dev-master"
 
+  },
+  "autoload": {
+    "psr-4": {
+      "wmf\\": ""
+    }
+  }
+}
