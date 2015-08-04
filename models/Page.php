@@ -3,7 +3,7 @@
 namespace wmf\models;
 
 use Yii;
-use wmu\models\UserGroup;
+use wmc\models\user\UserGroup;
 use wmc\behaviors\TimestampBehavior;
 
 /**
