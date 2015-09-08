@@ -3,7 +3,6 @@
 namespace wmf\controllers;
 
 use Yii;
-use wmc\filters\AccessControl;
 use yii\web\HttpException;
 
 /**
