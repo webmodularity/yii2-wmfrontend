@@ -45,10 +45,9 @@ class Page extends \wmc\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'title', 'html'], 'required'],
-            [['html'], 'string'],
+            [['name', 'title'], 'required'],
+            [['layout'], 'default', 'value' => null],
             [['status'], 'integer'],
-            [['updated_at', 'created_at'], 'safe'],
             [['name', 'title', 'layout'], 'string', 'max' => 255],
             [['name'], 'unique']
         ];
@@ -63,7 +62,8 @@ class Page extends \wmc\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'title' => 'Title',
-            'html' => 'Html',
+            'markdown' => 'Markdown',
+            'html' => 'HTML',
             'layout' => 'Layout',
             'status' => 'Status',
             'updated_at' => 'Updated At',
@@ -85,6 +85,14 @@ class Page extends \wmc\db\ActiveRecord
     public function getPageBreadcrumbs()
     {
         return $this->hasMany(PageBreadcrumb::className(), ['page_id' => 'id'])->orderBy('order_by');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPageMarkdown()
+    {
+        return $this->hasMany(PageMarkdown::className(), ['page_id' => 'id'])->orderBy(['page_version' => SORT_DESC]);
     }
 
     public static function findPageFromName($name) {
