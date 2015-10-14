@@ -5,6 +5,7 @@ namespace wmf\models;
 use Yii;
 use wmc\models\user\UserGroup;
 use wmc\behaviors\TimestampBehavior;
+use wmc\behaviors\UserGroupAccessBehavior;
 
 /**
  * This is the model class for table "{{%page}}".
@@ -21,7 +22,7 @@ use wmc\behaviors\TimestampBehavior;
  * @property UserGroup[] $userGroups
  * @property PageBreadcrumb[] $pageBreadcrumbs
  */
-class Page extends \wmc\db\ActiveRecord
+class Page extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -35,6 +36,11 @@ class Page extends \wmc\db\ActiveRecord
         return [
             [
                 'class' => TimestampBehavior::className()
+            ],
+            [
+                'class' => UserGroupAccessBehavior::className(),
+                'viaTableName' => '{{%page_access}}',
+                'itemIdField' => 'page_id'
             ]
         ];
     }
@@ -74,14 +80,6 @@ class Page extends \wmc\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUserGroups()
-    {
-        return $this->hasMany(UserGroup::className(), ['id' => 'user_group_id'])->viaTable('{{%page_access}}', ['page_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getPageBreadcrumbs()
     {
         return $this->hasMany(PageBreadcrumb::className(), ['page_id' => 'id'])->orderBy('order_by');
@@ -95,20 +93,19 @@ class Page extends \wmc\db\ActiveRecord
         return $this->hasMany(PageMarkdown::className(), ['page_id' => 'id'])->orderBy(['page_version' => SORT_DESC]);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLatestMarkdown()
+    {
+        return $this->hasOne(PageMarkdown::className(), ['page_id' => 'id'])->orderBy(['page_version' => SORT_DESC])->limit(1);
+    }
+
     public static function findPageFromName($name) {
         if (empty($name) || !is_string($name)) {
             return null;
         }
 
         return static::findOne(['name' => $name, 'status' => 1]);
-    }
-
-    public function groupHasAccess($groupId = 0) {
-        $pageId = $this->id;
-        if (!empty($pageId) && is_int($groupId)) {
-            $access = $this->getUserGroups()->where(['id' => $groupId])->count();
-            return $access > 0 ? true : false;
-        }
-        return false;
     }
 }

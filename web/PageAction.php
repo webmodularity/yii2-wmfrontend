@@ -14,7 +14,7 @@ class PageAction extends \yii\base\Action
         $page = Page::findPageFromName($name);
 
         if (is_null($page)) {
-            Yii::warning("PageAction 404 on (".$name.")");
+            Yii::error("PageAction 404 on (".$name.")");
             throw new NotFoundHttpException("File not found.");
         }
 
@@ -26,7 +26,7 @@ class PageAction extends \yii\base\Action
         }
 
         if ($page->groupHasAccess($groupId) === false) {
-            Yii::warning("PageAction 404[Bad Permissions] on (".$name.")");
+            Yii::error("PageAction 404[Bad Permissions] on (".$name.")");
             throw new NotFoundHttpException("File not found.");
         }
 

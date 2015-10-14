@@ -3,14 +3,13 @@
 namespace wmf\controllers;
 
 use Yii;
-use yii\web\HttpException;
+use \yii\filters\AccessControl;
 
 /**
  * Site controller
  */
 class SiteController extends \yii\web\Controller
 {
-
     /**
      * @inheritdoc
      */
