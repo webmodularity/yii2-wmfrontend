@@ -55,7 +55,8 @@ class Page extends \yii\db\ActiveRecord
             [['layout'], 'default', 'value' => null],
             [['status'], 'integer'],
             [['name', 'title', 'layout'], 'string', 'max' => 255],
-            [['name'], 'unique']
+            [['name'], 'unique'],
+            [['name'], 'match', 'pattern' => '/^[a-z0-9\-]+$/', 'message' => 'Page URL must contain ONLY lowercase letters (a-z), numbers (0-9), or hyphens (-).']
         ];
     }
 
