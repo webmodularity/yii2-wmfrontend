@@ -39,7 +39,7 @@ class ContactForm extends Model
             'name' => 'Your Name',
             'email' => 'Your Email',
             'message' => 'Your Message',
-            'captcha' => "Please Confirm You're Human"
+            'captcha' => "reCAPTCHA Verification"
         ];
     }
 }
