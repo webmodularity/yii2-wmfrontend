@@ -30,9 +30,7 @@ class ContactForm extends Model
             [['message'], 'string', 'max' => 10000, 'tooLong' => 'Message too long! (10000 characters max)'],
             // email has to be a valid email address
             [['email'], 'email', 'message' => "Invalid Email Address!"],
-            [['captcha'], ReCaptchaValidator::className(), 'emptyMessage' => "Please confirm you aren't a robot.",
-                'incorrectMessage' => "Failed to verify reCaptcha field."
-            ]
+            [['captcha'], ReCaptchaValidator::className()]
         ];
     }
 
