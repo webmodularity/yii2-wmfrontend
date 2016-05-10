@@ -1,6 +1,7 @@
 <?php
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use himiklab\yii2\recaptcha\ReCaptcha;
 
 $form = ActiveForm::begin([
     'id' => \wmf\modules\contact\widgets\Contact::FORM_ID,
@@ -54,7 +55,7 @@ $form = ActiveForm::begin([
 
 
 <div class="form-group">
-    <?=  $form->field($model, 'captcha')->widget('wmc\modules\recaptcha\widgets\Recaptcha', ['clientOptions' => ['data-theme' => 'dark']]); ?>
+    <?=  $form->field($model, 'captcha')->widget(ReCaptcha::className(), ['clientOptions' => ['data-theme' => 'dark']]); ?>
 </div>
 
 <p>
